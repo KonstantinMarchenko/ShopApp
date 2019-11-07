@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import shopapp.models.BasketEntity;
 import shopapp.services.BasketService;
+import shopapp.services.SpringBasketService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class BasketController {
 
     @Autowired
-    BasketService basketService;
+    SpringBasketService basketService;
 
     @GetMapping(value = "/v1/baskets/{id}")
     public BasketEntity findBasketById(@PathVariable("id") int id) {

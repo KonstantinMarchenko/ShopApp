@@ -1,11 +1,10 @@
 package shopapp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import shopapp.models.ProductEntity;
 import shopapp.services.ProductService;
+import shopapp.services.SpringProductService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    SpringProductService productService;
 
     @GetMapping(value = "/v1/products/{id}")
     public ProductEntity findProductById(@PathVariable("id") int id) {
