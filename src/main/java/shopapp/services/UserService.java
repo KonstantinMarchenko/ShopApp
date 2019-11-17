@@ -3,7 +3,7 @@ package shopapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shopapp.dao.UserDao;
-import shopapp.models.UserEntity;
+import shopapp.models.UsersEntity;
 
 import java.util.List;
 
@@ -13,19 +13,19 @@ public class UserService {
     @Autowired
     UserDao userDao;
 
-    public UserEntity findUserById(int id) {
+    public UsersEntity findUserById(int id) {
         return userDao.findUserById(id);
     }
 
-    public List<UserEntity> findAllUsers() {
+    public List<UsersEntity> findAllUsers() {
         return userDao.findAllUsers();
     }
 
-    public void createUser(UserEntity userEntity) {
+    public void createUser(UsersEntity userEntity) {
         userDao.createUser(userEntity);
     }
 
-    public boolean updateUser(UserEntity userEntity) {
+    public boolean updateUser(UsersEntity userEntity) {
         return userDao.updateUser(userEntity);
     }
 

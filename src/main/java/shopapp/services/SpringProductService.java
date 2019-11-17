@@ -1,18 +1,18 @@
 package shopapp.services;
 
-import shopapp.models.ProductEntity;
+import shopapp.models.ProductsEntity;
 
 import java.util.List;
 
 public interface SpringProductService {
 
-    public ProductEntity findProductById(int id);
+    public ProductsEntity findProductById(int id);
 
-    public List<ProductEntity> findAllProducts();
+    public List<ProductsEntity> findAllProducts();
 
-    public void createProduct(ProductEntity productEntity);
+    public void createProduct(ProductsEntity productEntity);
 
-    public boolean updateProduct(ProductEntity productEntity);
+    public boolean updateProduct(ProductsEntity productEntity);
 
     public boolean deleteProductById(int id);
 }

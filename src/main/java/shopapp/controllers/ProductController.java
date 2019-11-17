@@ -2,8 +2,7 @@ package shopapp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import shopapp.models.ProductEntity;
-import shopapp.services.ProductService;
+import shopapp.models.ProductsEntity;
 import shopapp.services.SpringProductService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,23 +15,23 @@ public class ProductController {
     SpringProductService productService;
 
     @GetMapping(value = "/v1/products/{id}")
-    public ProductEntity findProductById(@PathVariable("id") int id) {
+    public ProductsEntity findProductById(@PathVariable("id") int id) {
         return productService.findProductById(id);
     }
 
     @GetMapping(value = "/v1/products")
-    public List<ProductEntity> findAllProducts() {
+    public List<ProductsEntity> findAllProducts() {
         return productService.findAllProducts();
     }
 
     @PostMapping(value = "/v1/products")
-    public void createProduct(@RequestBody ProductEntity productEntity, HttpServletResponse response) {
+    public void createProduct(@RequestBody ProductsEntity productEntity, HttpServletResponse response) {
         productService.createProduct(productEntity);
         response.setStatus(HttpServletResponse.SC_CREATED);
     }
 
     @PutMapping(value = "/v1/products")
-    public void updateProduct(@RequestBody ProductEntity productEntity, HttpServletResponse response) {
+    public void updateProduct(@RequestBody ProductsEntity productEntity, HttpServletResponse response) {
         if (productService.updateProduct(productEntity)) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {

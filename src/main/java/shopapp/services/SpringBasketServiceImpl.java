@@ -3,7 +3,7 @@ package shopapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shopapp.dao.BasketRepository;
-import shopapp.models.BasketEntity;
+import shopapp.models.BasketsEntity;
 
 import java.util.List;
 
@@ -14,30 +14,29 @@ public class SpringBasketServiceImpl implements SpringBasketService{
     BasketRepository basketRepository;
 
     @Override
-    public BasketEntity findBasketById(int id) {
+    public BasketsEntity findBasketById(int id) {
         return basketRepository.findBasketEntityById(id);
     }
 
     @Override
-    public List<BasketEntity> findAllBaskets() {
+    public List<BasketsEntity> findAllBaskets() {
         return basketRepository.findAll();
     }
 
     @Override
-    public void createBasket(BasketEntity basketEntity) {
+    public void createBasket(BasketsEntity basketEntity) {
         basketRepository.saveAndFlush(basketEntity);
     }
 
     @Override
-    public boolean updateBasket(BasketEntity basketEntity) {
+    public boolean updateBasket(BasketsEntity basketEntity) {
 
         boolean basketEntityPresent = false;
 
-        BasketEntity updatedBasketEntity = basketRepository.findBasketEntityById(basketEntity.getId());
+        BasketsEntity updatedBasketEntity = basketRepository.findBasketEntityById(basketEntity.getId());
 
         if (updatedBasketEntity != null){
             basketEntityPresent = true;
-            updatedBasketEntity.setName(basketEntity.getName());
             basketRepository.saveAndFlush(updatedBasketEntity);
         }
 
@@ -49,7 +48,7 @@ public class SpringBasketServiceImpl implements SpringBasketService{
 
         boolean basketEntityPresent = false;
 
-        BasketEntity deletedBasketEntity = basketRepository.findBasketEntityById(id);
+        BasketsEntity deletedBasketEntity = basketRepository.findBasketEntityById(id);
 
         if (deletedBasketEntity != null){
             basketEntityPresent = true;

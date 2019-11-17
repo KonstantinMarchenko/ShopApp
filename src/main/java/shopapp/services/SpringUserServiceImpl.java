@@ -3,7 +3,7 @@ package shopapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shopapp.dao.UserRepository;
-import shopapp.models.UserEntity;
+import shopapp.models.UsersEntity;
 
 import java.util.List;
 
@@ -14,26 +14,26 @@ public class SpringUserServiceImpl implements SpringUserService {
     UserRepository userRepository;
 
     @Override
-    public UserEntity findUserById(int id) {
+    public UsersEntity findUserById(int id) {
         return userRepository.findUserEntityById(id);
     }
 
     @Override
-    public List<UserEntity> findAllUsers() {
+    public List<UsersEntity> findAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public void createUser(UserEntity userEntity) {
+    public void createUser(UsersEntity userEntity) {
         userRepository.saveAndFlush(userEntity);
     }
 
     @Override
-    public boolean updateUser(UserEntity userEntity) {
+    public boolean updateUser(UsersEntity userEntity) {
 
         boolean userEntityPresent = false;
 
-        UserEntity updatedUserEntity = userRepository.findUserEntityById(userEntity.getId());
+        UsersEntity updatedUserEntity = userRepository.findUserEntityById(userEntity.getId());
 
         if (updatedUserEntity != null) {
             userEntityPresent = true;
@@ -50,7 +50,7 @@ public class SpringUserServiceImpl implements SpringUserService {
 
         boolean userEntityPresent = false;
 
-        UserEntity deletedUserEntity = userRepository.findUserEntityById(id);
+        UsersEntity deletedUserEntity = userRepository.findUserEntityById(id);
 
         if (deletedUserEntity != null) {
             userEntityPresent = true;

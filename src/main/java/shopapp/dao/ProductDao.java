@@ -2,7 +2,7 @@ package shopapp.dao;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-import shopapp.models.ProductEntity;
+import shopapp.models.ProductsEntity;
 import shopapp.utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
@@ -10,25 +10,25 @@ import java.util.List;
 @Repository
 public class ProductDao {
 
-    public ProductEntity findProductById(int id) {
+    public ProductsEntity findProductById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        ProductEntity productEntity = session.get(ProductEntity.class, id);
+        ProductsEntity productEntity = session.get(ProductsEntity.class, id);
         session.getTransaction().commit();
         session.close();
         return productEntity;
     }
 
-    public List<ProductEntity> findAllProducts() {
+    public List<ProductsEntity> findAllProducts() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        List<ProductEntity> productEntities = (List<ProductEntity>) session.createQuery("from ProductEntity").list();
+        List<ProductsEntity> productEntities = (List<ProductsEntity>) session.createQuery("from ProductsEntity").list();
         session.getTransaction().commit();
         session.close();
         return productEntities;
     }
 
-    public void createProduct(ProductEntity productEntity) {
+    public void createProduct(ProductsEntity productEntity) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(productEntity);
@@ -36,17 +36,17 @@ public class ProductDao {
         session.close();
     }
 
-    public boolean updateProduct(ProductEntity productEntity) {
+    public boolean updateProduct(ProductsEntity productEntity) {
         boolean productPresent = false;
 
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        ProductEntity updatedProductEntity = session.get(ProductEntity.class, productEntity.getId());
+        ProductsEntity updatedProductEntity = session.get(ProductsEntity.class, productEntity.getId());
 
         if (updatedProductEntity != null) {
             productPresent = true;
             updatedProductEntity.setName(productEntity.getName());
-            updatedProductEntity.setQuantity(productEntity.getQuantity());
+            updatedProductEntity.setPrice(productEntity.getPrice());
             session.update(updatedProductEntity);
         }
 
@@ -61,7 +61,7 @@ public class ProductDao {
 
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        ProductEntity productEntity = session.get(ProductEntity.class, id);
+        ProductsEntity productEntity = session.get(ProductsEntity.class, id);
 
         if (productEntity != null) {
             porductPresent = true;

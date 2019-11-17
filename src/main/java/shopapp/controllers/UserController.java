@@ -2,9 +2,8 @@ package shopapp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import shopapp.models.UserEntity;
+import shopapp.models.UsersEntity;
 import shopapp.services.SpringUserService;
-import shopapp.services.UserService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -16,23 +15,23 @@ public class UserController {
     SpringUserService userService;
 
     @GetMapping(value = "/v1/users/{id}")
-    public UserEntity findUserById(@PathVariable("id") int id) {
+    public UsersEntity findUserById(@PathVariable("id") int id) {
         return userService.findUserById(id);
     }
 
     @GetMapping(value = "/v1/users")
-    public List<UserEntity> findAllUsers() {
+    public List<UsersEntity> findAllUsers() {
         return userService.findAllUsers();
     }
 
     @PostMapping(value = "/v1/users")
-    public void createUser(@RequestBody UserEntity userEntity, HttpServletResponse response) {
+    public void createUser(@RequestBody UsersEntity userEntity, HttpServletResponse response) {
         userService.createUser(userEntity);
         response.setStatus(HttpServletResponse.SC_CREATED);
     }
 
     @PutMapping(value = "/v1/users")
-    public void updateUser(@RequestBody UserEntity userEntity, HttpServletResponse response) {
+    public void updateUser(@RequestBody UsersEntity userEntity, HttpServletResponse response) {
         if (userService.updateUser(userEntity)) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {

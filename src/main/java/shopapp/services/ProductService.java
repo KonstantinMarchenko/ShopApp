@@ -3,7 +3,7 @@ package shopapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shopapp.dao.ProductDao;
-import shopapp.models.ProductEntity;
+import shopapp.models.ProductsEntity;
 
 import java.util.List;
 
@@ -13,19 +13,19 @@ public class ProductService {
     @Autowired
     ProductDao productDao;
 
-    public ProductEntity findProductById(int id) {
+    public ProductsEntity findProductById(int id) {
         return productDao.findProductById(id);
     }
 
-    public List<ProductEntity> findAllProducts() {
+    public List<ProductsEntity> findAllProducts() {
         return productDao.findAllProducts();
     }
 
-    public void createProduct(ProductEntity productEntity) {
+    public void createProduct(ProductsEntity productEntity) {
         productDao.createProduct(productEntity);
     }
 
-    public boolean updateProduct(ProductEntity productEntity) {
+    public boolean updateProduct(ProductsEntity productEntity) {
         return productDao.updateProduct(productEntity);
     }
 

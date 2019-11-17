@@ -2,7 +2,7 @@ package shopapp.dao;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-import shopapp.models.BasketEntity;
+import shopapp.models.BasketsEntity;
 import shopapp.utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
@@ -10,25 +10,25 @@ import java.util.List;
 @Repository
 public class BasketDao {
 
-    public BasketEntity findBasketById(int id) {
+    public BasketsEntity findBasketById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        BasketEntity basketEntity = session.get(BasketEntity.class, id);
+        BasketsEntity basketEntity = session.get(BasketsEntity.class, id);
         session.getTransaction().commit();
         session.close();
         return basketEntity;
     }
 
-    public List<BasketEntity> findAllBaskets() {
+    public List<BasketsEntity> findAllBaskets() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        List<BasketEntity> productEntities = (List<BasketEntity>) session.createQuery("from BasketEntity ").list();
+        List<BasketsEntity> productEntities = (List<BasketsEntity>) session.createQuery("from BasketsEntity ").list();
         session.getTransaction().commit();
         session.close();
         return productEntities;
     }
 
-    public void createBasket(BasketEntity basketEntity) {
+    public void createBasket(BasketsEntity basketEntity) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(basketEntity);
@@ -36,16 +36,15 @@ public class BasketDao {
         session.close();
     }
 
-    public boolean updateBasket(BasketEntity basketEntity) {
+    public boolean updateBasket(BasketsEntity basketEntity) {
         boolean baskerPresent = false;
 
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        BasketEntity updatedBasketEntity = session.get(BasketEntity.class, basketEntity.getId());
+        BasketsEntity updatedBasketEntity = session.get(BasketsEntity.class, basketEntity.getId());
 
         if (updatedBasketEntity != null) {
             baskerPresent = true;
-            updatedBasketEntity.setName(basketEntity.getName());
             session.update(updatedBasketEntity);
         }
 
@@ -60,7 +59,7 @@ public class BasketDao {
 
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        BasketEntity basketEntity = session.get(BasketEntity.class, id);
+        BasketsEntity basketEntity = session.get(BasketsEntity.class, id);
 
         if (basketEntity != null) {
             basketPresent = true;

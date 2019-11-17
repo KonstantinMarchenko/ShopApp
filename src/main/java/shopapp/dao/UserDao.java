@@ -2,7 +2,7 @@ package shopapp.dao;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-import shopapp.models.UserEntity;
+import shopapp.models.UsersEntity;
 import shopapp.utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
@@ -11,25 +11,25 @@ import java.util.List;
 @Repository
 public class UserDao {
 
-    public UserEntity findUserById(int id) {
+    public UsersEntity findUserById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        UserEntity userEntity = session.get(UserEntity.class, id);
+        UsersEntity userEntity = session.get(UsersEntity.class, id);
         session.getTransaction().commit();
         session.close();
         return userEntity;
     }
 
-    public List<UserEntity> findAllUsers() {
+    public List<UsersEntity> findAllUsers() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        List<UserEntity> userEntities = (List<UserEntity>) session.createQuery("from UserEntity ").list();
+        List<UsersEntity> userEntities = (List<UsersEntity>) session.createQuery("from UsersEntity ").list();
         session.getTransaction().commit();
         session.close();
         return userEntities;
     }
 
-    public void createUser(UserEntity userEntity) {
+    public void createUser(UsersEntity userEntity) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(userEntity);
@@ -37,12 +37,12 @@ public class UserDao {
         session.close();
     }
 
-    public boolean updateUser(UserEntity userEntity) {
+    public boolean updateUser(UsersEntity userEntity) {
         boolean userPresent = false;
 
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        UserEntity updatedUserEntity = session.get(UserEntity.class, userEntity.getId());
+        UsersEntity updatedUserEntity = session.get(UsersEntity.class, userEntity.getId());
 
         if (updatedUserEntity != null) {
             userPresent = true;
@@ -62,7 +62,7 @@ public class UserDao {
 
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        UserEntity userEntity = session.get(UserEntity.class, id);
+        UsersEntity userEntity = session.get(UsersEntity.class, id);
 
         if (userEntity != null) {
             userPresent = true;

@@ -3,7 +3,7 @@ package shopapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shopapp.dao.ProductRepository;
-import shopapp.models.ProductEntity;
+import shopapp.models.ProductsEntity;
 
 import java.util.List;
 
@@ -14,30 +14,31 @@ public class SpringProductServiceImpl implements SpringProductService {
     ProductRepository productRepository;
 
     @Override
-    public ProductEntity findProductById(int id) {
-        return productRepository.findProductEntityById(id);
+    public ProductsEntity findProductById(int id) {
+        ProductsEntity productEntity = productRepository.findProductEntityById(id);
+        return productEntity;
     }
 
     @Override
-    public List<ProductEntity> findAllProducts() {
+    public List<ProductsEntity> findAllProducts() {
         return productRepository.findAll();
     }
 
     @Override
-    public void createProduct(ProductEntity productEntity) {
+    public void createProduct(ProductsEntity productEntity) {
         productRepository.saveAndFlush(productEntity);
     }
 
     @Override
-    public boolean updateProduct(ProductEntity productEntity) {
+    public boolean updateProduct(ProductsEntity productEntity) {
 
         boolean productEntityPresent = false;
 
-        ProductEntity updatedProductEntity = productRepository.findProductEntityById(productEntity.getId());
+        ProductsEntity updatedProductEntity = productRepository.findProductEntityById(productEntity.getId());
 
         if (updatedProductEntity != null){
             productEntityPresent = true;
-            updatedProductEntity.setQuantity(productEntity.getQuantity());
+            updatedProductEntity.setPrice(productEntity.getPrice());
             updatedProductEntity.setName(productEntity.getName());
             productRepository.saveAndFlush(updatedProductEntity);
         }
@@ -50,7 +51,7 @@ public class SpringProductServiceImpl implements SpringProductService {
 
         boolean productEntityPresent = false;
 
-        ProductEntity deletedProductEntity = productRepository.findProductEntityById(id);
+        ProductsEntity deletedProductEntity = productRepository.findProductEntityById(id);
 
         if (deletedProductEntity != null){
             productEntityPresent = true;

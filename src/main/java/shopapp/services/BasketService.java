@@ -3,7 +3,7 @@ package shopapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shopapp.dao.BasketDao;
-import shopapp.models.BasketEntity;
+import shopapp.models.BasketsEntity;
 
 import java.util.List;
 
@@ -13,19 +13,19 @@ public class BasketService {
     @Autowired
     BasketDao basketDao;
 
-    public BasketEntity findBasketById(int id) {
+    public BasketsEntity findBasketById(int id) {
         return basketDao.findBasketById(id);
     }
 
-    public List<BasketEntity> findAllBaskets() {
+    public List<BasketsEntity> findAllBaskets() {
         return basketDao.findAllBaskets();
     }
 
-    public void createBasket(BasketEntity basketEntity) {
+    public void createBasket(BasketsEntity basketEntity) {
         basketDao.createBasket(basketEntity);
     }
 
-    public boolean updateBasket(BasketEntity basketEntity) {
+    public boolean updateBasket(BasketsEntity basketEntity) {
         return basketDao.updateBasket(basketEntity);
     }
 

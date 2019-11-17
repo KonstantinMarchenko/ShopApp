@@ -2,10 +2,10 @@ package shopapp.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import shopapp.models.ProductEntity;
+import shopapp.models.ProductsEntity;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
+public interface ProductRepository extends JpaRepository<ProductsEntity, Long> {
 
-    public ProductEntity findProductEntityById(int id);
+    public ProductsEntity findProductEntityById(int id);
 }
