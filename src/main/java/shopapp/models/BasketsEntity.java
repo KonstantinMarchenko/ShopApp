@@ -1,8 +1,12 @@
 package shopapp.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 @Entity
 @Table(name = "baskets", schema = "dbo", catalog = "shop")
 public class BasketsEntity {
@@ -58,8 +62,9 @@ public class BasketsEntity {
         return Objects.hash(id, usersId, productsId);
     }
 
+    @JsonBackReference(value = "user-basket")
     @ManyToOne
-    @JoinColumn(name = "users_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "users_id", nullable = false)
     public UsersEntity getUsersByUsersId() {
         return usersByUsersId;
     }
@@ -68,8 +73,9 @@ public class BasketsEntity {
         this.usersByUsersId = usersByUsersId;
     }
 
+    @JsonBackReference(value = "product-basket")
     @ManyToOne
-    @JoinColumn(name = "products_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "products_id", nullable = false)
     public ProductsEntity getProductsByProductsId() {
         return productsByProductsId;
     }

@@ -1,5 +1,9 @@
 package shopapp.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -58,12 +62,14 @@ public class UsersEntity {
         return Objects.hash(id, name, password);
     }
 
-//    @OneToMany(mappedBy = "usersByUsersId")
-//    public Collection<BasketsEntity> getBasketsById() {
-//        return basketsById;
-//    }
-//
-//    public void setBasketsById(Collection<BasketsEntity> basketsById) {
-//        this.basketsById = basketsById;
-//    }
+    @JsonManagedReference(value = "user-basket")
+    @OneToMany(mappedBy = "usersByUsersId", targetEntity = BasketsEntity.class)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    public Collection<BasketsEntity> getBasketsById() {
+        return basketsById;
+    }
+
+    public void setBasketsById(Collection<BasketsEntity> basketsById) {
+        this.basketsById = basketsById;
+    }
 }
