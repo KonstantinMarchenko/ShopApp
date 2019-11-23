@@ -1,19 +1,19 @@
 package shopapp.models;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "[User]", schema = "dbo", catalog = "SHOP")
 public class UserEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String password;
+    private Collection<BasketEntity> basketsById;
 
-    @Basic
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     public int getId() {
         return id;
@@ -24,7 +24,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "Name", nullable = false, length = 30)
+    @Column(name = "Name", nullable = false, length = 20)
     public String getName() {
         return name;
     }
@@ -56,5 +56,14 @@ public class UserEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, password);
+    }
+
+    @OneToMany(mappedBy = "userByUserId", cascade = CascadeType.REMOVE)
+    public Collection<BasketEntity> getBasketsById() {
+        return basketsById;
+    }
+
+    public void setBasketsById(Collection<BasketEntity> basketsById) {
+        this.basketsById = basketsById;
     }
 }
